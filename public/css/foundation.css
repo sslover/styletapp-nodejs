@@ -1940,6 +1940,8 @@ form.custom {
     margin-bottom: 0; }
   .top-bar .title-area {
     position: relative; }
+  .top-bar .title-area li {
+    width: auto; }
   .top-bar .name {
     height: 45px;
     margin: 0;
