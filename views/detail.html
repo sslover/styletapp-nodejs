@@ -1,22 +1,47 @@
 
-    <!-- Thumbnails -->
-        <div class="large-12 columns">
-          <h1>Browse {{sub.category}} Classes</h1>
-          <div class="row">
-          {{#classes}}
-            <div class="large-3 small-6 columns">
-              <img src="{{photo}}" height="220" width="220" style="height:220px;"/>
-              <div class="panel" style="height:177px;">
-                <h5>{{name}}</h5>
-                <h6 class="subheader">{{description}}</h6>
-              </div>
-            </div>
-          {{/classes}}
 
-    <!-- End Thumbnails -->
-
+      <!-- Header Content -->
+ 
+        <div class="row">
+ 
+          <div class="large-6 columns">
+ 
+            <img style="max-width:500px;" src="{{clothing.photo}}"><br>
+ 
           </div>
+ 
+ 
+          <div class="large-6 columns">
+ 
+            <h3 class="show-for-small">{{clothing.name}}<hr/></h3>
+ 
+            <div class="panel">
+              <h4 class="hide-for-small" style="margin-bottom:0px;">{{clothing.name}}</h4>
+              <p>{{clothing.brand}}, {{clothing.type}}</p>
+              <hr/>
+            <h5 class="subheader">{{clothing.caption}}</h5>
+            </div>
+ 
+          <div class="row">
+              <div class="large-6 small-6 columns">
+                <div class="panel">
+                  <h5>Track Your Style </h5>
+                <h6 class="subheader">Start adding clothing to track your style.</h6>
+                <a href="/add" class="small button">Add Clothing</a>
+                </div>
+              </div>
+ 
+              <div class="large-6 small-6 columns">
+                <div class="panel">
+                  <h5>Me gusta</h5>
+                <h6 class="subheader">Want to see other clothing like this?</h6>
+                <a href="/" class="small button">View More</a>
+                </div>
+              </div>
+          </div>
+ 
+          </div>
+ 
         </div>
-      </div>
-
-</div>
+ 
+      <!-- End Header Content -->

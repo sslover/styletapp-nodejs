@@ -64,8 +64,10 @@ app.get('/c/:clothing_id', routes.detail);
 app.get('/u/:user_id')
 
 //new clothing routes
-app.get('/add',routes.addCloth); //display form
-app.post('/add',routes.createCloth); //form POST submits here
+app.get('/add',routes.addClothing); //display form
+app.post('/add',routes.createClothing); //form POST submits here
+
+app.get('/loadclothing', routes.loadData); // load in astronauts array into db
 
 
 // create NodeJS HTTP server using 'app'

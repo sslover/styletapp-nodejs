@@ -10,51 +10,31 @@
   <link rel="stylesheet" href="../css/normalize.css" />
   <link rel="stylesheet" href="../css/foundation.css" />
   <link rel="stylesheet" href="../css/app.css" />
-
+  <link href='http://fonts.googleapis.com/css?family=Gabriela' rel='stylesheet' type='text/css'>
   <script src="../js/vendor/custom.modernizr.js"></script>
 
 </head>
 <body>
 
   <!-- Header and Nav -->
-<div class="row">
-    <div class="large-12 columns">
-
-    <!-- Navigation -->
-
-      <div class="row">
-        <div class="large-12 columns">
-
-          <nav class="top-bar">
-            <ul class="title-area">
-              <!-- Title Area -->
-              <li class="name">
-                <h1>
-                  <a href="/">
-                    Learn It Live Class Catalog
-                  </a>
-                </h1>
-              </li>
-              <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
-            </ul>
-         
-            <section class="top-bar-section">
-              <!-- Right Nav Section -->
-              <ul class="right">
-                <li class="divider"></li>
-                <li><a href="/">Home</a></li>
-                <li class="divider"></li>
-                <li><a href="/subjects/technology">Technology Classes</a></li>
-                <li class="divider"></li>
-                <li><a href="/subjects/business">Business Classes</a></li>
-                <li class="divider"></li>
-                <li><a href="/subjects/wellness">Wellness Classes</a></li>
-              </ul>
-            </section>
-          </nav>
-          <!-- End Top Bar -->
-        </div>
-      </div>
+ <nav class="top-bar" style="text-align: center;">
+    <ul class="title-area">
+      <!-- Title Area -->
+      <li class="name">
+        <h1>
+          <a href="/">
+            styletapp
+          </a>
+        </h1>
+      </li>
+    </ul>
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <a href="/add" class="radius button" style="margin-right:50px;">Add Clothing</a>
+      </ul>
+  </nav>
+ 
+  <!-- End Top Bar -->
 
     <!-- End Navigation -->
     <!-- Main Content -->
@@ -62,7 +42,7 @@
       <div class="row">
         {{{yield}}}
     </div>
-  </div>
+
 
   <script>
   document.write('<script src=' +
