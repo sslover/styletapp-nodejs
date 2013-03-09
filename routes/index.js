@@ -78,6 +78,80 @@ exports.detail = function(req, res) {
 }
 
 /*
+	GET /c/:clothing_id/edit
+	edit clothing form - to do
+*/
+exports.editForm = function(req, res) {
+
+	console.log("edit form requested for " + req.params.clothing_id);
+
+	//get the requested clothing by the param on the url :clothing_id
+	var clothing_id = req.params.clothing_id;
+
+	// query the database for that clothing id
+	clothingModel.findOne({_id:clothing_id}, function(err, currentClothing){
+
+		if (err) {
+			return res.status(500).send("There was an error on this clothing query :(");
+		}
+
+		if (currentClothing == null) {
+			return res.status(404).render('404.html');
+		}
+
+		console.log("Found clothing!");
+		console.log(currentClothing.name);
+
+			//prepare template data for view
+			var templateData = {
+				clothing : currentClothing,
+				pageTitle : "Edit " + currentClothing.name
+			}
+
+			// render and return the template
+			res.render('edit_form.html', templateData);
+
+	}); // end of .findOne query
+
+}
+/*
+	POST /edit
+*/
+exports.editClothing = function(req, res) {
+
+	console.log("received form submission");
+	console.log(req.body);
+
+	// accept form post data
+	newClothing = new clothingModel();
+		newClothing.name = req.body.name;
+		newClothing.photo = req.body.photoUrl;
+		newClothing.type = req.body.type;
+		newClothing.caption = req.body.caption;
+		newClothing.brand = req.body.brand;
+		newClothing.id = 1;
+
+    console.log(newClothing.name + newClothing.photo + newClothing.type + newClothing.caption + newClothing.brand + newClothing.id);
+	// save the newClothing to the database
+	newClothing.save(function(err){
+		if (err) {
+			console.error("Error on saving new clothing");
+			console.error("err");
+			return res.send("There was an error when creating the new clothing");
+
+		} else {
+			console.log("Created a new clothing!");
+			console.log(newClothing);
+
+			// redirect to the clothing page
+			res.redirect('/c/'+ newClothing.id)
+		}
+
+	});
+
+}
+
+/*
 	GET /create
 */
 exports.addClothing = function(req, res){
@@ -160,6 +234,41 @@ exports.loadData = function(req, res) {
 	return res.send("loaded clothing!");
 
 } // end of loadData function
+
+//mobile app
+exports.parseJson = function(req, res) {
+
+	console.log("received new JSON");
+	console.log(req.body);
+
+	// accept form post data
+	newClothing = new clothingModel();
+		newClothing.name = req.body.name;
+		newClothing.photo = req.body.photoUrl;
+		newClothing.type = req.body.type;
+		newClothing.caption = req.body.caption;
+		newClothing.brand = req.body.brand;
+		newClothing.id = 1;
+
+    console.log(newClothing.name + newClothing.photo + newClothing.type + newClothing.caption + newClothing.brand + newClothing.id);
+	// save the newClothing to the database
+	newClothing.save(function(err){
+		if (err) {
+			console.error("Error on saving new clothing");
+			console.error("err");
+			return res.send("There was an error when creating the new clothing");
+
+		} else {
+			console.log("Created a new clothing!");
+			console.log(newClothing);
+
+			// redirect to the clothing page
+			res.redirect('/c/'+ newClothing.id)
+		}
+
+	});
+
+}
 
 /*
 	Initial Test Data
