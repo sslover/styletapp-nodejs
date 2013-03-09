@@ -73,7 +73,7 @@ app.post('/c/:clothing_id/edit',routes.editClothing); //form POST submits here
 app.get('/loadclothing', routes.loadData); // load in astronauts array into db
 
 // mobile app routes
-app.post('/android', routes.parseJson);
+app.post('/android',routes.parseJson);
 
 
 // create NodeJS HTTP server using 'app'

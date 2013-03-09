@@ -244,13 +244,11 @@ exports.parseJson = function(req, res) {
 	// accept form post data
 	newClothing = new clothingModel();
 		newClothing.name = req.body.name;
-		newClothing.photo = req.body.photoUrl;
+		newClothing.photo = req.body.photo;
 		newClothing.type = req.body.type;
 		newClothing.caption = req.body.caption;
 		newClothing.brand = req.body.brand;
-		newClothing.id = 1;
 
-    console.log(newClothing.name + newClothing.photo + newClothing.type + newClothing.caption + newClothing.brand + newClothing.id);
 	// save the newClothing to the database
 	newClothing.save(function(err){
 		if (err) {
@@ -263,7 +261,7 @@ exports.parseJson = function(req, res) {
 			console.log(newClothing);
 
 			// redirect to the clothing page
-			res.redirect('/c/'+ newClothing.id)
+			//res.redirect('/c/'+ newClothing.id)
 		}
 
 	});
