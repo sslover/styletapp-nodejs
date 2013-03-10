@@ -261,7 +261,7 @@ exports.parseJson = function(req, res) {
 			console.log("Created a new clothing!");
 			console.log(newClothing);
 			// respond with the clothing ID
-			res.json({ id: newClothing._id })
+			return res.json({ id: newClothing._id })
 		}
 
 	});
