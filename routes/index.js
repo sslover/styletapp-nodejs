@@ -261,7 +261,10 @@ exports.parseJson = function(req, res) {
 			console.log("Created a new clothing!");
 			console.log(newClothing);
 			// respond with the clothing ID
-			return res.json({ id: newClothing._id })
+			response.writeHead(200, {
+			  'Content-Length': body.length,
+			  'Content-Type': 'text/plain' });
+			return response.json({ id: newClothing._id })
 		}
 
 	});
