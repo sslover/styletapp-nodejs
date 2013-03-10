@@ -262,8 +262,9 @@ exports.parseJson = function(req, res) {
 			console.log("Created a new clothing!");
 			console.log(newClothing);
 			// respond with the clothing ID
-  			//res.writeHead(200);
-  			//res.end("hello world\n");
+			res.writeHead(200, {
+			  'id': newClothing.id});
+  			res.end();
  			//https.createServer(options, parseJson).listen(8000);
 			//return response.json({ id: newClothing._id })
 		}
