@@ -10,6 +10,7 @@ var ClothingSchema = new Schema({
 	type : String,
 	caption : String,
 	brand : String,
+	tapCounter : Number,
     lastupdated : { type: Date, default: Date.now }
 });
 

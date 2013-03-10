@@ -248,6 +248,7 @@ exports.parseJson = function(req, res) {
 		newClothing.type = req.body.type;
 		newClothing.caption = req.body.caption;
 		newClothing.brand = req.body.brand;
+		newClothing.tapCounter = 1;
 
 	// save the newClothing to the database
 	newClothing.save(function(err){
