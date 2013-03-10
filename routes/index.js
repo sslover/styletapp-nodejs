@@ -260,9 +260,8 @@ exports.parseJson = function(req, res) {
 		} else {
 			console.log("Created a new clothing!");
 			console.log(newClothing);
-
-			// redirect to the clothing page
-			//res.redirect('/c/'+ newClothing.id)
+			// respond with the clothing ID
+			res.json({ id: newClothing._id })
 		}
 
 	});
