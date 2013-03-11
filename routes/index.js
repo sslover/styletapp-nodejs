@@ -269,7 +269,7 @@ exports.parseJson = function(req, res) {
 }
 
 // mobile app, reads ID and sends back data
-exports.get_tag_info = function(req, res) {
+exports.getInfo = function(req, res) {
 
 	console.log("received new JSON request");
 	console.log(req.body);
