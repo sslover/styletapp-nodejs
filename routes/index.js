@@ -267,7 +267,7 @@ exports.parseJson = function(req, res) {
 }
 
 // mobile app, reads ID, increments counter by 1, and sends back data
-exports.getInfo = function(req, res) {
+exports.readInfo = function(req, res) {
 
 	console.log("received new JSON request");
 	console.log(req.body);
@@ -325,6 +325,48 @@ exports.getInfo = function(req, res) {
 			res.send("There was an error updating "+ clothing_id).status(500);
 		}
 	})
+
+	}); // end of .findOne query
+
+}
+
+// mobile app, given an ID, gets the info and sends back data
+exports.getInfo = function(req, res) {
+
+	console.log("received new JSON request");
+	console.log(req.body);
+
+	//get the requested clothing by the param on the url :clothing_id
+	var clothing_id = req.body.id;
+	console.log("clothing_id " + clothing_id);
+
+	// query the database for that clothing id
+	clothingModel.findOne({_id:clothing_id}, function(err, currentClothing){
+		if (err) {
+			return res.status(500).send("There was an error on this clothing query :(");
+		}
+
+		if (currentClothing == null) {
+			return res.status(404).render('404.html');
+		}
+
+		if (clothing != null) {
+		res.json({ id: currentClothing._id, 
+				photo: currentClothing.photo,
+				name : currentClothing.name,
+				type : currentClothing.type,
+				caption : currentClothing.caption,
+				brand : currentClothing.brand,
+				tapCounter : currentClothing.tapCounter,
+				lastupdated : currentClothing.lastupdated
+		});
+
+		} else {
+
+			// unable to find clothing, return 404
+			console.error("unable to find that clothing: " + clothing_id);
+			res.send("There was an error updating "+ clothing_id).status(500);
+		}
 
 	}); // end of .findOne query
 
