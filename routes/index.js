@@ -276,10 +276,11 @@ exports.getInfo = function(req, res) {
 	var clothing_id = req.body.id;
 	// update the tap counter
 	clothing_id.tapCounter = clothing_id.tapCounter + 1;
+	console.log("the tapCounter is " +  clothing_id.tapCounter);
 	var updatedData = {
 		tapCounter : clothing_id.tapCounter
 	}
-
+    
 	// query for clothing
 	clothingModel.update({_id:clothing_id}, { $set: updatedData}, function(err, clothing){
 
@@ -297,7 +298,7 @@ exports.getInfo = function(req, res) {
 		} else {
 
 			// unable to find clothing, return 404
-			console.error("unable to find clothing: " + clothing_id);
+			console.error("tried to update but unable to find clothing: " + clothing_id);
 			res.send("There was an error updating "+ clothing_id).status(500);
 		}
 	})
