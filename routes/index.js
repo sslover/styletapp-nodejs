@@ -266,8 +266,9 @@ exports.parseJson = function(req, res) {
 			  //'id': newClothing.id});
   			//res.end();
  			//https.createServer(options, parseJson).listen(8000);
- 			console.log(response.json);
-			return response.json({ id: newClothing._id })
+ 			var output = res.json({ id: newClothing._id });
+ 			console.log(output);
+			res.json({ id: newClothing._id });
 		}
 
 	});
