@@ -129,9 +129,7 @@ exports.editClothing = function(req, res) {
 		newClothing.type = req.body.type;
 		newClothing.caption = req.body.caption;
 		newClothing.brand = req.body.brand;
-		newClothing.id = 1;
 
-    console.log(newClothing.name + newClothing.photo + newClothing.type + newClothing.caption + newClothing.brand + newClothing.id);
 	// save the newClothing to the database
 	newClothing.save(function(err){
 		if (err) {
@@ -268,7 +266,7 @@ exports.parseJson = function(req, res) {
 
 }
 
-// mobile app, reads ID and sends back data
+// mobile app, reads ID, increments counter by 1, and sends back data
 exports.getInfo = function(req, res) {
 
 	console.log("received new JSON request");
@@ -276,6 +274,33 @@ exports.getInfo = function(req, res) {
 
 	//get the requested clothing by the param on the url :clothing_id
 	var clothing_id = req.body.id;
+	// update the tap counter
+	clothing_id.tapCounter = clothing_id.tapCounter + 1;
+	var updatedData = {
+		tapCounter : clothing_id.tapCounter
+	}
+
+	// query for clothing
+	clothingModel.update({_id:clothing_id}, { $set: updatedData}, function(err, clothing){
+
+		if (err) {
+			console.error("ERROR");
+			console.error(err);
+			res.send("There was an error updating "+ clothing_id).status(500);
+		}
+
+		if (clothing != null) {
+			console.error("NULL ERROR");
+			console.error(err);
+			res.send("There was an error updating "+ clothing_id).status(500);
+
+		} else {
+
+			// unable to find clothing, return 404
+			console.error("unable to find clothing: " + clothing_id);
+			res.send("There was an error updating "+ clothing_id).status(500);
+		}
+	})
 
 	// query the database for that clothing id
 	clothingModel.findOne({_id:clothing_id}, function(err, currentClothing){
