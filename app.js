@@ -74,6 +74,7 @@ app.get('/loadclothing', routes.loadData); // load in astronauts array into db
 
 // mobile app routes
 app.post('/android',routes.parseJson);
+app.post('/get_tag_info', routes.getInfo);
 
 
 // create NodeJS HTTP server using 'app'

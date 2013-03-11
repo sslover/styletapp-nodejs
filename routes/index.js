@@ -236,7 +236,7 @@ exports.loadData = function(req, res) {
 } // end of loadData function
 
 
-//mobile app
+//mobile app, creates new clothing entity
 exports.parseJson = function(req, res) {
 
 	console.log("received new JSON");
@@ -261,17 +261,47 @@ exports.parseJson = function(req, res) {
 		} else {
 			console.log("Created a new clothing!");
 			console.log(newClothing);
-			// respond with the clothing ID
-			//res.writeHead(200, {
-			  //'id': newClothing.id});
-  			//res.end();
- 			//https.createServer(options, parseJson).listen(8000);
- 			var output = res.json({ id: newClothing._id });
- 			console.log(output);
 			res.json({ id: newClothing._id });
 		}
 
 	});
+
+}
+
+// mobile app, reads ID and sends back data
+exports.get_tag_info = function(req, res) {
+
+	console.log("received new JSON");
+	console.log(req.body);
+
+	//get the requested clothing by the param on the url :clothing_id
+	var clothing_id = req.body._id;
+
+	// query the database for that clothing id
+	clothingModel.findOne({_id:clothing_id}, function(err, currentClothing){
+
+		if (err) {
+			return res.status(500).send("There was an error on this clothing query :(");
+		}
+
+		if (currentClothing == null) {
+			return res.status(404).render('404.html');
+		}
+
+		console.log("Found clothing!");
+		console.log(currentClothing._id);
+
+		res.json({ id: currentClothing._id, 
+				photo: currentClothing.photo,
+				name : currentClothing.name,
+				type : currentClothing.type,
+				caption : currentClothing.caption,
+				brand : currentClothing.brand,
+				tapCounter : currentClothing.tapCounter,
+				lastupdated : currentClothing.lastupdated
+		});
+
+	}); // end of .findOne query
 
 }
 
