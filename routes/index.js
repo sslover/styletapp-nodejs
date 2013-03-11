@@ -271,11 +271,11 @@ exports.parseJson = function(req, res) {
 // mobile app, reads ID and sends back data
 exports.get_tag_info = function(req, res) {
 
-	console.log("received new JSON");
+	console.log("received new JSON request");
 	console.log(req.body);
 
 	//get the requested clothing by the param on the url :clothing_id
-	var clothing_id = req.body._id;
+	var clothing_id = req.body.id;
 
 	// query the database for that clothing id
 	clothingModel.findOne({_id:clothing_id}, function(err, currentClothing){
