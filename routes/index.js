@@ -274,7 +274,7 @@ exports.getInfo = function(req, res) {
 
 	//get the requested clothing by the param on the url :clothing_id
 	var clothing_id = req.body.id;
-	var clothingQuery = clothingModel.findOne({_id:cloting_id});
+	var clothingQuery = clothingModel.findOne({_id:clothing_id});
 	clothingQuery.exec(function(err, clothing){
 
 		if (err) {
@@ -371,7 +371,7 @@ var getClothingById = function(_id) {
 	for(c in clothes) {
 		var currentClothing = clothes[c];
 
-		// does current cloting id match requested id?
+		// does current clothing id match requested id?
 		if (currentClothing._id == _id) {
 			return currentClothing;
 		}
