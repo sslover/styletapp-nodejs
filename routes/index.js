@@ -341,7 +341,7 @@ exports.getInfo = function(req, res) {
 	console.log("clothing_id " + clothing_id);
 
 	// query the database for the item
-	var clothingQuery = clothingtModel.findOne({_id:clothing_id});
+	var clothingQuery = clothingModel.findOne({_id:clothing_id});
 	astroQuery.exec(function(err, currentClothing){
 
 		if (err) {
