@@ -340,17 +340,20 @@ exports.getInfo = function(req, res) {
 	var clothing_id = req.body.id;
 	console.log("clothing_id " + clothing_id);
 
-	// query the database for that clothing id
-	clothingModel.findOne({_id:clothing_id}, function(err, currentClothing){
+	// query the database for the item
+	var clothingQuery = clothingtModel.findOne({_id:clothing_id});
+	astroQuery.exec(function(err, currentClothing){
+
 		if (err) {
-			return res.status(500).send("There was an error on this clothing query :(");
+			return res.status(500).send("There was an error on this clothing query");
 		}
 
 		if (currentClothing == null) {
 			return res.status(404).render('404.html');
 		}
 
-		if (clothing != null) {
+		console.log("Found clothing");
+		console.log(currentClothing._id);
 		res.json({ id: currentClothing._id, 
 				photo: currentClothing.photo,
 				name : currentClothing.name,
@@ -360,16 +363,7 @@ exports.getInfo = function(req, res) {
 				tapCounter : currentClothing.tapCounter,
 				lastupdated : currentClothing.lastupdated
 		});
-
-		} else {
-
-			// unable to find clothing, return 404
-			console.error("unable to find that clothing: " + clothing_id);
-			res.send("There was an error updating "+ clothing_id).status(500);
-		}
-
 	}); // end of .findOne query
-
 }
 
 exports.returnRecords = function(req, res) {
