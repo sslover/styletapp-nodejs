@@ -320,9 +320,9 @@ exports.getInfo = function(req, res) {
 
 		} else {
 
-			// unable to find astronaut, return 404
-			console.error("unable to find astronaut: " + astro_id);
-			return res.status(404).render('404.html');
+			// unable to find clothing, return 404
+			console.error("unable to find that clothing: " + clothing_id);
+			res.send("There was an error updating "+ clothing_id).status(500);
 		}
 	})
 
