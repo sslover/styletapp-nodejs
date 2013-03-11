@@ -274,32 +274,47 @@ exports.getInfo = function(req, res) {
 
 	//get the requested clothing by the param on the url :clothing_id
 	var clothing_id = req.body.id;
-	// update the tap counter
-	clothing_id.tapCounter = clothing_id.tapCounter + 1;
-	console.log("the tapCounter is " +  clothing_id.tapCounter);
-	var updatedData = {
-		tapCounter : clothing_id.tapCounter
-	}
-    
-	// query for clothing
-	clothingModel.update({_id:clothing_id}, { $set: updatedData}, function(err, clothing){
+	var clothingQuery = clothingModel.findOne({_id:cloting_id});
+	clothingQuery.exec(function(err, clothing){
 
 		if (err) {
 			console.error("ERROR");
 			console.error(err);
-			res.send("There was an error updating "+ clothing_id).status(500);
+			res.send("There was an error querying for "+ clothing_id).status(500);
 		}
 
 		if (clothing != null) {
-			console.error("NULL ERROR");
-			console.error(err);
-			res.send("There was an error updating "+ clothing_id).status(500);
+			//increment the tap counter by 1
+			clothing_id.tapCounter = clothing_id.tapCounter + 1;
+			var updatedData = {
+				tapCounter : clothing_id.tapCounter
+			}
+			clothingModel.update({_id:clothing_id}, { $set: updatedData}, function(err, clothing){
 
-		} else {
+				if (err) {
+					console.error("ERROR");
+					console.error(err);
+					res.send("There was an error updating "+ clothing_id).status(500);
+				}
 
-			// unable to find clothing, return 404
-			console.error("tried to update but unable to find clothing: " + clothing_id);
-			res.send("There was an error updating "+ clothing_id).status(500);
+				if (clothing != null) {
+					console.error("NULL ERROR");
+					console.error(err);
+					res.send("There was an error updating "+ clothing_id).status(500);
+
+				} else {
+
+					// unable to find clothing, return 404
+					console.error("tried to update but unable to find clothing: " + clothing_id);
+					res.send("There was an error updating "+ clothing_id).status(500);
+				}
+			})
+		}
+
+		else {
+
+			console.log("unable to find clothing: " + clothing_id);
+			res.send("There was an error querying for "+ clothing_id).status(500);
 		}
 	})
 
