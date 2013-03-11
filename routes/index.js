@@ -274,50 +274,7 @@ exports.getInfo = function(req, res) {
 
 	//get the requested clothing by the param on the url :clothing_id
 	var clothing_id = req.body.id;
-	var clothingQuery = clothingModel.findOne({_id:clothing_id});
-	console.log("we got to clothingQuery and it is " + clothingQuery);
-	 clothingQuery.exec(function(err, clothing){
-
-	 	if (err) {
-	 		console.error("ERROR");
-	 		console.error(err);
-	 		res.send("There was an error querying for "+ clothing_id).status(500);
-	 	}
-
-	 	if (clothing != null) {
-	 		//increment the tap counter by 1
-	 		clothing_id.tapCounter = clothing_id.tapCounter + 1;
-	 		var updatedData = {
-	 			tapCounter : clothing_id.tapCounter
-	 		}
-	 		clothingModel.update({_id:clothing_id}, { $set: updatedData}, function(err, clothing){
-
-	 			if (err) {
-	 				console.error("ERROR");
-	 				console.error(err);
-	 				res.send("There was an error updating "+ clothing_id).status(500);
-	 			}
-
-	 			if (clothing != null) {
-	 				console.error("NULL ERROR");
-	 				console.error(err);
-	 				res.send("There was an error updating "+ clothing_id).status(500);
-
-	 			} else {
-
-	 				// unable to find clothing, return 404
-	 				console.error("tried to update but unable to find clothing: " + clothing_id);
-	 				res.send("There was an error updating "+ clothing_id).status(500);
-	 			}
-	 		})
-	 	}
-
-	 	else {
-
-	 		console.log("unable to find clothing: " + clothing_id);
-	 		res.send("There was an error querying for "+ clothing_id).status(500);
-	 	}
-	 })
+	console.log("clothing_id " + clothing_id);
 
 	// query the database for that clothing id
 	clothingModel.findOne({_id:clothing_id}, function(err, currentClothing){
