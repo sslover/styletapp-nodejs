@@ -345,7 +345,7 @@ exports.returnRecords = function(req, res) {
 		var result = allRecords.length;
 		for (var i=0; i<allRecords.length;i++) {
 			var ids = new Array();
-			ids[i] = allRecords[i]._id;
+			ids.push(allRecords[i]._id);
 		}
 		console.log(ids);
 		res.json({ records: result, 
