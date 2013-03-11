@@ -290,12 +290,13 @@ exports.getInfo = function(req, res) {
 		console.log("Found clothing!");
 		console.log(currentClothing._id);
 
+		// increment tapCounter by 1
 		currentClothing.tapCounter = currentClothing.tapCounter + 1;
 
-	// prepare form data
-	var updatedData = {
-		tapCounter : currentClothing.tapCounter
-	}
+		// prepare updated data
+		var updatedData = {
+			tapCounter : currentClothing.tapCounter
+		}
 
 	// query for clothing
 	clothingModel.update({_id:clothing_id}, { $set: updatedData}, function(err, clothing){
@@ -317,7 +318,6 @@ exports.getInfo = function(req, res) {
 				lastupdated : currentClothing.lastupdated
 		});
 
-
 		} else {
 
 			// unable to find astronaut, return 404
@@ -328,6 +328,23 @@ exports.getInfo = function(req, res) {
 
 	}); // end of .findOne query
 
+}
+
+exports.returnRecords = function(req, res) {
+
+	console.log("received request for number of records");
+	console.log(req.body);
+
+	clothingModel.find({}, '_id', function(err, allRecords){
+
+		if (err) {
+			res.send("Unable to query database for clothing").status(500);
+		};
+
+		console.log("retrieved " + allRecords.length + " records from database");
+		var result = allRecords.length;
+		res.json({ records: result });
+	});
 }
 
 /*
