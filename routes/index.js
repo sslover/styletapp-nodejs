@@ -343,8 +343,8 @@ exports.returnRecords = function(req, res) {
 
 		console.log("retrieved " + allRecords.length + " records from database");
 		var result = allRecords.length;
+		var ids = new Array();
 		for (var i=0; i<allRecords.length;i++) {
-			var ids = new Array();
 			ids.push(allRecords[i]._id);
 		}
 		console.log(ids);
