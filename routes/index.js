@@ -290,6 +290,23 @@ exports.getInfo = function(req, res) {
 		console.log("Found clothing!");
 		console.log(currentClothing._id);
 
+		currentClothing.tapCounter = currentClothing.tapCounter + 1;
+
+	// prepare form data
+	var updatedData = {
+		tapCounter : currentClothing.tapCounter
+	}
+
+	// query for clothing
+	clothingModel.update({_id:clothing_id}, { $set: updatedData}, function(err, clothing){
+
+		if (err) {
+			console.error("ERROR");
+			console.error(err);
+			res.send("There was an error updating "+ clothing_id).status(500);
+		}
+
+		if (clothing != null) {
 		res.json({ id: currentClothing._id, 
 				photo: currentClothing.photo,
 				name : currentClothing.name,
@@ -299,6 +316,15 @@ exports.getInfo = function(req, res) {
 				tapCounter : currentClothing.tapCounter,
 				lastupdated : currentClothing.lastupdated
 		});
+
+
+		} else {
+
+			// unable to find astronaut, return 404
+			console.error("unable to find astronaut: " + astro_id);
+			return res.status(404).render('404.html');
+		}
+	})
 
 	}); // end of .findOne query
 
